@@ -46,14 +46,24 @@ app.get("/authors/:id/", (req, res) => {
 
 //exo4
 
-  app.get("/json/authors/:id/", (req, res) => {
-    const id = req.params.id;
-    res.send(`${authors[id - 1].name}, ${authors[id - 1].nationality}`);
-  });
-  app.get("/json/authors/:id/books/", (req, res) => {
-    const id = req.params.id;
-    res.send(`${authors[id - 1].books}`);
-  });
+app.get("/json/authors/:id/", (req, res) => {
+  const id = req.params.id;
+  const idObject = {
+    name: authors[id - 1].name,
+    nationality: authors[id - 1].nationality,
+  };
+  const jsonString = JSON.stringify(idObject);
+  res.send(jsonString);
+});
+app.get("/json/authors/:id/books/", (req, res) => {
+  const id = req.params.id;
+  const idObject = {
+    books: authors[id - 1].books,
+  };
+  const jsonString = JSON.stringify(idObject);
+  res.send(jsonString);
+});
+
 
 app.listen(port, () => {
   console.log('Server started on port: ' + port);
