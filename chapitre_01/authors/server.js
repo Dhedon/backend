@@ -1,3 +1,4 @@
+//exo1
 const express = require('express');
 const app = express();
 const port = 8000;
@@ -28,9 +29,30 @@ var authors = [
 app.get('/', (req, res) => {
     res.send('Authors API');
   });
-app.get('/authors/:id/', (req, res) => {
-  const id = req.params.id;
-  res.send(`authors${[id].name}, his ${[id].nationality}`);
+
+  //exo2
+
+app.get("/authors/:id/", (req, res) => {
+    const id = req.params.id;
+    res.send(`${authors[id - 1].name}, ${authors[id - 1].nationality}`);
+  });
+
+  //exo3
+
+  app.get("/authors/:id/books/", (req, res) => {
+    const id = req.params.id;
+    res.send(`${authors[id - 1].books}`);
+  });
+
+//exo4
+
+  app.get("/json/authors/:id/", (req, res) => {
+    const id = req.params.id;
+    res.send(`${authors[id - 1].name}, ${authors[id - 1].nationality}`);
+  });
+  app.get("/json/authors/:id/books/", (req, res) => {
+    const id = req.params.id;
+    res.send(`${authors[id - 1].books}`);
   });
 
 app.listen(port, () => {
